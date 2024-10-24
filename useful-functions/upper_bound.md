@@ -5,10 +5,10 @@ Used to find the first element in the given range that is greater than the given
 ```cpp
 std::upper_bound (first, last,  val, comp);
 ```
-first: Iterator to the first element in the given range.
-last: Iterator to the element that is just after the last element in the range.
-val: Value of the upper bound to search for in the range. 
-comp (optional): Binary function that accepts two arguments and returns a boolean value. By default, it is set to find the first value just greater than the val.
+- first: Iterator to the first element in the given range.
+- last: Iterator to the element that is just after the last element in the range.
+- val: Value of the upper bound to search for in the range. 
+- comp (optional): Binary function that accepts two arguments and returns a boolean value. By default, it is set to find the first value just greater than the val.
 
 Returns an iterator to the first element in a sorted range [first, last) that is just greater than a given value.
 If all the elements are less than or equal to the given value, then the iterator to the end of the range.

@@ -6,10 +6,16 @@ It uses a binary search, so it's O(logn).
 ```cpp
 std::lower_bound (first, last, val, comp);
 ```
-first: Iterator to the first element in the range.
-last: Iterator to the element one past the last element in the range.
-val: Value of the lower bound to be searched for in the range.
-comp(optional): Binary function that accepts and compares the val with the current element in the range. By default, it returns true if the element in the range is smaller than val.
+### Parameters
+- first: Iterator to the first element in the range.
+- last: Iterator to the element one past the last element in the range.
+- val: Value of the lower bound to be searched for in the range.
+- comp(optional): Binary function that accepts and compares the val with the current element in the range. By default, it returns true if the element in the range is smaller than val.
+
+### Return value
+- This function returns an iterator pointing to the next smallest number just greater than or equal to val.
+- If all the elements in the range are less than the given value, the function returns an iterator to the end of the range.
+- If all the elements in the range are larger than given value, the function returns a pointer to the first element.
 
 ```cpp
 #include <bits/stdc++.h>

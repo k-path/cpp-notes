@@ -1,5 +1,10 @@
 # std::upper_bound
-Used to find the first element in the given range that is greater than the given value. Opposite of lower_bound, also O(logn).
+Used to find the first element in the given range that is greater than the given value. Not necessarily the opposite of lower_bound, also O(logn). 
+Lower bound: Returns an iterator pointing to the first element in the range that is not less than (i.e., greater than or equal to) the given value.
+Upper bound: Returns an iterator pointing to the first element in the range that is greater than the given value.
+### Key differences:
+Lower bound: Includes elements equal to the given value.
+Upper bound: Excludes elements equal to the given value.
 
 ## Syntax
 ```cpp

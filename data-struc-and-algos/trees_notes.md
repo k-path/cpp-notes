@@ -62,6 +62,6 @@
 
 ## BFS
 ### Iteratively (Queue)
-- BFS is usually implemented using queue as it is much straightforward than a recursive approach.
+- BFS is usually implemented using queue as it is much more straightforward than a recursive approach.
 - The queue holds each level of the tree at a time. First holding the root, then use the root to push it's children and pop root, children pushes it's children and pops until the queue is empty.
 - It may be good to keep track of the level size, which is the current size of the queue. With 1 always being the level size for the root, and 2 for it's children and so on.

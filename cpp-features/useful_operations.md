@@ -56,7 +56,7 @@ while (!q.empty()) {
 	int new_i = i + d_i[k];
 	int new_j = j + d_j[k];
 	
-	if (new_i < m && new_i >= 0 && new_j < n && new_j >= 0) {
+	if (new_i < m && new_i >= 0 && new_j < n && new_j >= 0) { // boundary check
 	*Rest of BFS logic and checks*
 	
 ```

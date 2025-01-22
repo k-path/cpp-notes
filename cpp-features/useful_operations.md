@@ -42,3 +42,21 @@ int main() {
 	return 0;
 }
 ```
+
+## BFS 4-directionally on a graph using "direction arrays"
+```cpp
+vector<int> d_i = {1, -1, 0, 0};
+vector<int> d_j = {0, 0, 1, -1};
+while (!q.empty()) {
+    int i = q.front().first;
+    int j = q.front().second;
+    q.pop();
+// v Direction Array logic here v
+    for (int k = 0; k < 4; ++k) { // move in all 4 directions
+	int new_i = i + d_i[k];
+	int new_j = j + d_j[k];
+	
+	if (new_i < m && new_i >= 0 && new_j < n && new_j >= 0) {
+	*Rest of BFS logic and checks*
+	
+```

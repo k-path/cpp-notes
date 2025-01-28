@@ -12,10 +12,10 @@ A lambda function in C++ is an anonymous function that can be defined inline wit
 **capture clause**:
 This is where you specify which variables from the surrounding scope you want to use inside the lambda function.
 
-[]: Captures nothing. (You can't access anything defined outside of the lambda function)
-[=]: Captures all variables from the surrounding scope by value. (You can access all stuff within the same scope but they won't be modified)
-[&]: Captures all variables from the surrounding scope by reference. (You can access all stuff within the same scope and they can be modified)
-You can also capture specific variables by name, e.g., [x, &y].
+- []: Captures nothing. (You can't access anything defined outside of the lambda function)
+- [=]: Captures all variables from the surrounding scope by value. (You can access all stuff within the same scope but they won't be modified)
+- [&]: Captures all variables from the surrounding scope by reference. (You can access all stuff within the same scope and they can be modified)
+- You can also capture specific variables by name, e.g., [x, &y].
 
 **parameters**:
 This is the list of parameters the lambda function takes, just like a regular function.

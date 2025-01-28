@@ -95,3 +95,9 @@ int main() {
 
   return 0;
 ```
+
+```cpp
+    ...
+    // Descending order
+    sort(numbers.begin(), numbers.end(), [](int a, int b) { return a > b; });
+```

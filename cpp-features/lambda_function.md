@@ -89,7 +89,7 @@ int main() {
           }
   );
 
-  for (const Event& ev : events) {
+  for (const Event& ev : converted_events_array) {
     cout << ev.event_type << "\t" << ev.timestamp << '\n';
   }
 

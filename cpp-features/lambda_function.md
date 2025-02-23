@@ -101,3 +101,4 @@ int main() {
     // Descending order
     sort(numbers.begin(), numbers.end(), [](int a, int b) { return a > b; });
 ```
+The order of parameters represents their order in the container, int a is parameter 1 so it's the first number and int b is parameter 2 so it's the second number. This translates to "if a is greater than b (returns true) then they are in the correct order, if a is not greater than b (returns false) then they aren't in the correct order and they need to be swapped"

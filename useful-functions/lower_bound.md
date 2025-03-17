@@ -27,6 +27,7 @@ int main() {
   
     // Input vector containing sorted integers
     vector<int> vec = {10, 20, 30, 32, 34, 35, 40, 50};
+    // if we erase 35 from this vector, the lower bound would be the iterator pointing at 40
 
     // Finding the lower bound for value 30
     auto lb = lower_bound(vec.begin(), vec.end(), 35); 

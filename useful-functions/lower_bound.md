@@ -1,5 +1,5 @@
 # std::lower_bound
-The lower_bound() function is used to find an element in a sorted range that has a value not less than the given value. It is defined inside the <algorithm> header file.
+The lower_bound() function is used to find an element in a sorted range that has a value not less than the given value (either this value is equal to `val` or it's the next value greater than it). It is defined inside the <algorithm> header file.
 It uses a binary search, so it's O(logn).
 
 ## Syntax
@@ -18,27 +18,31 @@ std::lower_bound (first, last, val, comp);
 - If all the elements in the range are larger than given value, the function returns a pointer to the first element.
 
 ```cpp
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <vector>
+#include <iostream>
 using namespace std;
 
 int main() {
   
     // Input vector containing sorted integers
-    vector<int> vec = {10, 20, 30, 40, 50};
+    vector<int> vec = {10, 20, 30, 32, 34, 35, 40, 50};
 
     // Finding the lower bound for value 30
     auto lb = lower_bound(vec.begin(), vec.end(), 35); 
 
     // Checking if lower bound found and printing the position
-      if (lb != vec.end())
-      cout << "Position Found: " << distance(vec.begin(), lb);
-    else
+    if (lb != vec.end()) {
+      cout << "Position Found: " << distance(vec.begin(), lb) << '\n';
+      cout << "The number is " << *lb << '\n';
+    } else {
       cout << "Lower bound not found";
-
+    }
     return 0; 
-}
+} 
 ```
 Output
 ```
-Position Found: 3
+Position Found: 5
+The number is 35
 ```

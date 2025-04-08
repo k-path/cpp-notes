@@ -11,7 +11,7 @@ int main() {
 }
 ```
 
-## Get the last digit of a number/every digit of a number
+## Get the last digit of a number/every digit of a number OR Get every prefix of a number
 ```cpp
 #include <iostream>
 using namespace std;
@@ -25,6 +25,30 @@ int main() {
 }
 
 ```
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+	int num = 1337;
+	int stored_num = num;
+	int num_digits = 0;
+	while (num > 0) {
+		num_digits++;
+		num /= 10; // cut off last digit
+	}
+
+	int dividing_by = 1;
+	while (num_digits > 0) {
+		int curr_prefix = stored_num / dividing_by;
+		cout << curr_prefix << '\n';
+		dividing_by *= 10;
+		num_digits--;
+	}
+	return 0;
+}
+
+```
+
 ```
 7
 3

@@ -42,7 +42,7 @@ int main() {
 	int num_digits = 0;
 	while (num > 0) {
 		num_digits++;
-		num /= 10; // cut off last digit
+		num /= 10; 
 	}
 	
 	// num of digits tells us how many times we should do the process of dividing by 1 then multiples of 10

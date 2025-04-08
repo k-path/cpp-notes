@@ -36,13 +36,16 @@ int main() {
 using namespace std;
 int main() {
 	int num = 1337;
-	int stored_num = num;
+	int stored_num = num; // store the num so we dont lose when dividing
+
+	// first get number of digits
 	int num_digits = 0;
 	while (num > 0) {
 		num_digits++;
 		num /= 10; // cut off last digit
 	}
-
+	
+	// num of digits tells us how many times we should do the process of dividing by 1 then multiples of 10
 	int dividing_by = 1;
 	while (num_digits > 0) {
 		int curr_prefix = stored_num / dividing_by;

@@ -25,6 +25,12 @@ int main() {
 }
 
 ```
+```
+7
+3
+3
+1
+```
 ```cpp
 #include <iostream>
 using namespace std;
@@ -48,13 +54,14 @@ int main() {
 }
 
 ```
-
 ```
-7
-3
-3
+1337
+133
+13
 1
 ```
+
+
 
 ## Convert letter to its position in the alphabet
 ```cpp

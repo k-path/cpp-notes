@@ -136,12 +136,49 @@ int main() {
 Smart pointer is a class that behaves like a regular (raw) pointer but automatically manages the lifetime of the object it points to, preventing memory leaks. Smart pointers don't need destructors like raw pointers.
 
 ### std::unique_ptr
-As the name implies, makes sure that only exactly one copy of an object exists. Represents exclusive ownership. When the `unique_ptr`goes out of scope, the object is automatically deleted.
+As the name implies, makes sure that only exactly one owner of an object pointer exists. Represents exclusive ownership. When the `unique_ptr`goes out of scope, the object is automatically deleted. Introduced in C++11.
 
+It's a class template that wraps a raw pointer in it. -> and * can be used on the object because they are overloaded in the `unique_ptr` class.
+
+Operations: `std::release`, `std::reset`, `std::swap, `std::get`, `std::get_deleter`
+
+Example with a class:
+```cpp
+#include <iostream>
+#include <memory> // necessary include for using smart ptrs
+using namespace std;
+
+class Foo {
+    int x; // private by default since outside of public
+  public:
+    explicit Foo(int x) : x{x} {}
+    int getX() { return x; }
+  ~Foo() { cout << "Foo Destructor" << '\n'; }
+};
+
+int main() {
+  // Foo *f = new Foo(10);
+  // cout << f->getX() << '\n';
+
+  unique_ptr<Foo> p(new Foo(10)); // explicit constructor with raw pointer. In this case, p is on the stack, but the Foo object is on the heap
+  cout << p->getX() << '\n';
+
+  // other ways to create unique_ptr
+  // default constructor, 
+  // unique_ptr<int> ptr; 
+
+  // make_unique
+  // auto ptr = make_unique<int>(42); // safer and more efficient
+  unique_ptr<Foo> p2 = make_unique<Foo>(20);
+
+  // p = p2; This will FAIL, because you can not copy ownership
+  unique_ptr<Foo> p3 = move(p); // PASS because MOVING ownership is allowed
+}
+```
 
 ### std::shared_ptr
 Enables shared ownership. Multi `shared_ptr` instances can point to the same object, and a reference count tracks how many are doing so. The object is deleted only when the last shared_ptr pointing to it goes out of scope and is destroyed.
 
 
 ### std::weak_ptr
-It is a special type of `shared_ptr` which doesn't count the reference. Provides non-owning access to an object managed by a `shared_ptr`.
+It is a special type of `shared_ptr` which doesn't count the reference. Provides non-owning access to an object managed by a `shared_ptr`. The main purpose of `weak_ptr` is to solve circular reference problems that can occur with `shared_ptr`. If two objects hold `shared_ptr`s to each other, they'll never be deleted. If you make one of them a `weak_ptr` they both can be deleted.

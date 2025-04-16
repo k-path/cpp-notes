@@ -141,6 +141,11 @@ As the name implies, makes sure that only exactly one owner of an object pointer
 It's a class template that wraps a raw pointer in it. -> and * can be used on the object because they are overloaded in the `unique_ptr` class.
 
 Operations: `std::release`, `std::reset`, `std::swap, `std::get`, `std::get_deleter`
+- get() returns pointer to the managed object
+- release() will release the ownership of the managed object and return the managed object, so the pointer would then be pointing to null
+- reset() replaces the managed object with the argument. p2.reset(p4) = p2 gets set to new pointer p4 and previous pointer in p2 is deleted
+- swap() swaps managed objects
+- get_deleter() returns the deleter that is used for destruction of the managed object
 
 Example with a class:
 ```cpp
@@ -177,8 +182,74 @@ int main() {
 ```
 
 ### std::shared_ptr
-Enables shared ownership. Multi `shared_ptr` instances can point to the same object, and a reference count tracks how many are doing so. The object is deleted only when the last shared_ptr pointing to it goes out of scope and is destroyed.
+Enables shared ownership. Multiple `shared_ptr` instances can point to the same object, and a reference count tracks how many are doing so. The object is deleted only when the last shared_ptr pointing to it goes out of scope and is destroyed (when reference count becomes 0).
+`shared_ptr` is threads safe and not thread safe: control block is thread safe, managed object is not. 
 
+Three ways in total that `shared_ptr` will destroy managed objects:
+- If the last `shared_ptr` goes out of scope
+- if you initialize `shared_ptr` with some other `shared_ptr`
+- If you reset `shared_ptr`
+
+Reference count doesn't work when we use reference or pointer of shared_ptr.
+
+Example with a class:
+```cpp
+#include <iostream>
+#include <memory> 
+using namespace std;
+
+class Foo {
+    int x; 
+  public:
+    Foo(int x) : x{x} {}
+    int getX() { return x; }
+  ~Foo() { cout << "Foo Destructor" << '\n'; }
+};
+
+int main() {
+  shared_ptr<Foo> sp(new Foo(1));
+  cout << sp->getX() << '\n';
+  cout << sp.use_count() << '\n'; // 1
+  shared_ptr<Foo> sp1 = sp;
+  cout << sp.use_count() << '\n'; // 2
+  cout << sp1.use_count() << '\n'; // 2
+
+  shared_ptr<Foo> &sp2 = sp;
+  cout << sp.use_count() << '\n'; // REMAINS 2
+
+  shared_ptr<Foo> *sp3 = &sp;
+  cout << sp.use_count() << '\n'; // REMAINS 2
+  // has to be copy by value
+  
+}
+```
 
 ### std::weak_ptr
-It is a special type of `shared_ptr` which doesn't count the reference. Provides non-owning access to an object managed by a `shared_ptr`. The main purpose of `weak_ptr` is to solve circular reference problems that can occur with `shared_ptr`. If two objects hold `shared_ptr`s to each other, they'll never be deleted. If you make one of them a `weak_ptr` they both can be deleted.
+It is a special type of `shared_ptr` which doesn't count the reference. Provides non-owning access to an object managed by a `shared_ptr`. The main purpose of `weak_ptr` is to solve circular reference problems that can occur with `shared_ptr`. If two objects hold `shared_ptr`s to each other, they'll never be deleted. If you make one of them a `weak_ptr` they both can be deleted. 
+We have to convert `weak_ptr` to `shared_ptr` in order to use the managed object.
+
+```cpp
+#include <iostream>
+#include <memory> 
+using namespace std;
+
+int main() {
+  auto sharedPtr = make_shared<int>(100);
+  weak_ptr<int> weakPtr(sharedPtr);
+
+  cout << "weakPtr.use_count(): " << weakPtr.use_count() << '\n'; // 1
+  cout << "sharedPtr.use_count(): " << sharedPtr.use_count() << '\n'; // 1
+  cout << "weakPtr.expired(): " << weakPtr.expired() << '\n'; // false (0)
+
+  if (shared_ptr<int> sharedPtr1 = weakPtr.lock()) { // lock() creates a new shared_ptr that shares ownership of the managed object
+    cout << "*sharedPtr: " << *sharedPtr << '\n'; // 100
+    cout << "sharedPtr1.use_count(): " << sharedPtr1.use_count() << '\n'; // 2
+  } else {
+    cout << "Don't get the resource" << '\n';
+  }
+  
+}
+
+```
+
+

@@ -2,6 +2,11 @@
 Memory management is required to avoid wastage of memory and to make sure allocation takes place efficently. During the declaration of arrays, sometimes the exact memory is not known to us, and that is why we declare an array of max size, which results in memory wastage.
 To avoid such a case, we use memory allocation. 
 
+## Stack vs Heap Memory
+Memory can be allocated on either the stack or the heap. Stack allocation happens in the function call stack, where each function gets its own memory for variables. Heap memory is controlled by the programmer since there's no built-in garbage collection.  Stack allocation refers to the process of assigning memory for local variables and function calls in the call stack. Happens automatically when function is called and is freed immediately when functuins ends. 
+
+Heap memory is allocated dynamically during program execution. Unlike stack memory, heap memory is not freed automatically when a functions ends. It requires manual deallocation to reclaim unused memory. Whenever an object is created, it is stored in heap memory, while references to these objects are stored in stack memory. Less safe than stack alloc because heap data is accessible by multiple threeads, which increases risk of data corruption and memory leaks if not handled properly. 
+
 ## Raw pointers
 A raw pointer is a variable that stores the memory address of another variable. It directly holds the memory location and provides direct access to the data stored at that address. Raw pointers are declared using an asterisk (*) before the variable name. 
 They require manual memory allocation using `new` and deallocation using `delete` or `delete[]` to prevent memory leaks.

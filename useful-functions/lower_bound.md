@@ -110,4 +110,7 @@ int main() {
 
 }
 ```
+In lower_bound, we have the entry from the container as first parameter, and the value we're searching for as second parameter.
+In upper_bound, we have the value we're searching for as first parameter, and the entry from the container as second parameter.
+
 Note that for this to work properly, your container should be sorted by the second element. If your container is sorted by the first element (altitude) instead of the second element (thrust), then binary search functions won't give correct results when searching by thrust values. So in this case our binary search based on the second element wouldn't make any sense.

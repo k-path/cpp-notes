@@ -94,3 +94,29 @@ while (!q.empty()) {
 	*Rest of BFS logic and checks*
 	
 ```
+
+## Traverse a 2D matrix/array as 1D
+```cpp
+// To treat a 2d matrix as a single dimension array:
+// We can identify each single num by its row index and col index
+// In a mxn matrix, every n elements are in the same row. In a 2x3 matrix, every 3 elements are in the same row. So i//cols tells us which row.
+// The remainder would give us the exact position in that row, i % cols is the exact position in a given row
+// meaning matrix[i//cols][i%cols] = exact position
+// but the last value would be m*n-1
+vector<vector<int>> matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
+int m = matrix.size(); // rows
+int n = matrix[0].size(); // cols
+
+for (int i = 0; i < m*n; ++i) {
+  cout << matrix[i/n][i%n] << " ";
+  if ( i%n == n-1 ) {
+    cout << '\n';
+  } 
+}
+```
+```
+1 3 5 7 
+10 11 16 20 
+23 30 34 60 
+```
+

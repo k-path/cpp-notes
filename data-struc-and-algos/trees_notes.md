@@ -57,6 +57,12 @@
   - Sometimes we may want process a node or do some operation on a node then do our left and right recurses, or left recurse first then process or operate on a node then recurse right, OR left recurse then right recurse then do some operation on the node.
   - For example, in Good Nodes question we use a preorder approach (we check the node before recursing left and right), in Kth Smallest question, we use a inorder approach (usually the way to go for BST because it gets a sorted traversal), we recurse left, increment counter, then recurse right.
 
+#### Recursion in a Nutshell
+- Anything that is called before the recursive statement in a recursive function happens right away.
+  - This is often called the "winding" phase, or what happens "on the way down" the call stack. As each function is called, it executes these initial instructions before pausing to call the next function deeper in the chain. (This corresponds to pre-order operations).
+- Anything that is called after the recursive statement only happens after the recursion hits a base case. But instead of happening in the order of that it was called by the recursion, it gets processed in reverse order. So the first thing in the path gets its call processed last if it is called after the recursive statement.
+  - This is the "unwinding" phase, or what happens "on the way up" the call stack. Recall that in a **Last-In-First-Out (LIFO)** stack, things are processed in the reverse order that they came in. (So this corresponds to post-order operations).
+
 ### Iteratively
 - It usually requires a stack. In my experience, it's usually more straightforward and simpler to just do it recursively
 
@@ -65,3 +71,4 @@
 - BFS is usually implemented using queue as it is much more straightforward than a recursive approach.
 - The queue holds each level of the tree at a time. First holding the root, then use the root to push it's children and pop root, children pushes it's children and pops until the queue is empty.
 - It may be good to keep track of the level size, which is the current size of the queue. With 1 always being the level size for the root, and 2 for it's children and so on.
+
